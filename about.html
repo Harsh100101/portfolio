@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>About — Harsh Sorathiya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+<style>
+.about-layout{display:grid;grid-template-columns:1fr 340px;gap:4rem;padding:4rem clamp(1.5rem,8vw,10rem);position:relative;z-index:2;align-items:start}
+.about-body p{color:var(--muted);font-size:1rem;line-height:1.85;margin-bottom:1.5rem}
+.about-body p:first-child{font-size:1.125rem;color:var(--text);line-height:1.75}
+.about-body strong{color:var(--text);font-weight:600}
+.about-sidebar{position:sticky;top:90px;display:flex;flex-direction:column;gap:1.25rem}
+.info-card{
+  background:linear-gradient(155deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  backdrop-filter:blur(var(--glass-blur)) saturate(140%);
+  -webkit-backdrop-filter:blur(var(--glass-blur)) saturate(140%);
+  border:1px solid var(--glass-border);border-radius:16px;padding:1.5rem;
+  transition:border-color .25s,background .25s;
+  box-shadow:var(--glass-shadow);
+}
+.info-card:hover{border-color:var(--glass-border-hover);background:linear-gradient(155deg, rgba(255,255,255,0.08), rgba(255,255,255,0.025))}
+.info-card-title{font-family:var(--fd);font-size:.78rem;font-weight:700;color:var(--text);letter-spacing:.05em;text-transform:uppercase;margin-bottom:1rem;opacity:.65}
+.info-row{display:flex;justify-content:space-between;align-items:baseline;padding:.4rem 0;border-bottom:1px solid var(--border);font-size:.875rem}
+.info-row:last-child{border:none}
+.info-row .lbl{color:var(--muted)}.info-row .val{color:var(--text);font-weight:500;text-align:right}
+.skill-bars{display:flex;flex-direction:column;gap:.85rem}
+.skill-bar-top{display:flex;justify-content:space-between;font-size:.8rem;margin-bottom:.35rem}
+.skill-bar-top .sname{color:var(--text);font-weight:500;display:flex;align-items:center;gap:.4rem}
+.skill-bar-top .sname img{width:16px;height:16px;object-fit:contain}
+.skill-bar-top .spct{color:var(--muted)}
+.bar-track{height:5px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;border:1px solid var(--border)}
+.bar-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--accent),var(--a2));transform:scaleX(0);transform-origin:left;transition:transform 1s cubic-bezier(.16,1,.3,1);box-shadow:0 0 8px rgba(91,127,255,.4)}
+.bar-fill.animate{transform:scaleX(1)}
+.cta-cards{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;padding:0 clamp(1.5rem,8vw,10rem) 5rem;position:relative;z-index:2}
+.cta-card{
+  display:flex;flex-direction:column;justify-content:space-between;
+  background:linear-gradient(155deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  backdrop-filter:blur(var(--glass-blur)) saturate(140%);
+  -webkit-backdrop-filter:blur(var(--glass-blur)) saturate(140%);
+  border:1px solid var(--glass-border);border-radius:18px;padding:2rem;
+  transition:border-color .25s,transform .25s,background .25s;text-decoration:none;color:inherit;
+  box-shadow:var(--glass-shadow);
+}
+.cta-card:hover{border-color:rgba(91,127,255,.4);transform:translateY(-3px);background:linear-gradient(155deg, rgba(255,255,255,0.09), rgba(255,255,255,0.03))}
+.cta-card-label{font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem}
+.cta-card h3{font-family:var(--fd);font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:.5rem;letter-spacing:-.025em}
+.cta-card p{color:var(--muted);font-size:.875rem;line-height:1.6;flex:1;margin-bottom:1.5rem}
+.cta-card .arrow{color:var(--accent);font-size:1.25rem;transition:transform .2s}
+.cta-card:hover .arrow{transform:translateX(4px)}
+.cta-card-icon{width:36px;height:36px;object-fit:contain;margin-bottom:1rem}
+@media(max-width:900px){.about-layout{grid-template-columns:1fr}.about-sidebar{position:static}.cta-cards{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div id="cursor"></div><div id="cursor-ring"></div>
+<div class="scroll-progress" id="scroll-progress"></div>
+<canvas id="bg-canvas"></canvas>
+<canvas id="shape-canvas" data-start-index="3"></canvas>
+<nav id="navbar" class="solid">
+  <a href="index.html" class="nav-logo">HS<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="experience.html">Experience</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="nav-cta">Hire me</a></li>
+  </ul>
+  <button class="nav-mobile-btn" id="mobile-btn">☰</button>
+</nav>
+<div class="nav-mobile-menu" id="mobile-menu">
+  <a href="index.html">Home</a><a href="projects.html">Projects</a>
+  <a href="experience.html">Experience</a><a href="about.html">About</a>
+  <a href="contact.html">Hire me →</a>
+</div>
+<div class="page">
+  <div class="page-hero">
+    <p class="page-hero-label reveal">Who I am</p>
+    <h1 class="reveal">About me</h1>
+    <p class="reveal">A final-year CSE (AI) student who builds things that actually get used.</p>
+  </div>
+  <div class="about-layout">
+    <div class="about-body">
+      <p class="reveal">I'm <strong>Harsh Sorathiya</strong>, a React Native and frontend developer based in Gujarat, India. I'm currently in my final year of B.Tech in Computer Science (AI specialisation) at Parul University, Vadodara — and I completed a React Native internship from January to April 2026, shipping real features on a live production product.</p>
+      <p class="reveal" style="transition-delay:.1s">My focus is on <strong>mobile and web apps that feel right</strong> — fast to load, intuitive to use, clean to maintain. I've been writing React Native since early 2026, and I've worked across the stack with React.js, Redux Toolkit, Node.js, Flask, PostgreSQL, and Supabase.</p>
+      <p class="reveal" style="transition-delay:.2s">I got into AI and recommendation systems through my final-year research — I published a paper in IJSET in <strong>October 2025</strong> on personalised recommendation pipelines, then built that research into a real full-stack platform (The Next Read), which I load-tested at 200 concurrent users with JMeter.</p>
+      <p class="reveal" style="transition-delay:.3s">In 2024, I <strong>led my team in a healthcare AI hackathon</strong> at Parul University — handling architecture, coordination, and full-stack delivery within the hackathon timeline. It taught me how to build fast under real constraints.</p>
+      <p class="reveal" style="transition-delay:.4s">Right now I'm looking for <strong>freelance projects and full-time roles</strong> in React Native and frontend development — Gujarat-first, but open to Pune, Noida, and remote-friendly teams across India and internationally.</p>
+    </div>
+    <div class="about-sidebar">
+      <div class="info-card reveal-scale">
+        <div class="info-card-title">Quick info</div>
+        <div class="info-row"><span class="lbl">Location</span><span class="val">Gujarat, India</span></div>
+        <div class="info-row"><span class="lbl">Status</span><span class="val" style="color:var(--a3)">Available ✓</span></div>
+        <div class="info-row"><span class="lbl">Degree</span><span class="val">B.Tech CSE (AI)</span></div>
+        <div class="info-row"><span class="lbl">Grad year</span><span class="val">2026</span></div>
+        <div class="info-row"><span class="lbl">Internship</span><span class="val">Jan–Apr 2026</span></div>
+        <div class="info-row"><span class="lbl">Research</span><span class="val">IJSET Oct 2025</span></div>
+      </div>
+      <div class="info-card reveal-scale" style="transition-delay:.1s">
+        <div class="info-card-title">Skill level</div>
+        <div class="skill-bars" id="skill-bars">
+          <div class="skill-bar-item"><div class="skill-bar-top"><span class="sname"><img id="sb-react" alt=""/>React Native</span><span class="spct">85%</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+          <div class="skill-bar-item"><div class="skill-bar-top"><span class="sname"><img id="sb-web" alt=""/>React.js</span><span class="spct">88%</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+          <div class="skill-bar-item"><div class="skill-bar-top"><span class="sname"><img id="sb-redux" alt=""/>Redux Toolkit</span><span class="spct">80%</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+          <div class="skill-bar-item"><div class="skill-bar-top"><span class="sname"><img id="sb-ai" alt=""/>Python / ML</span><span class="spct">72%</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+          <div class="skill-bar-item"><div class="skill-bar-top"><span class="sname"><img id="sb-gh" alt=""/>Git / Tools</span><span class="spct">78%</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta-cards">
+    <a href="projects.html" class="cta-card reveal-scale" style="transition-delay:.05s">
+      <div><img class="cta-card-icon" id="cta-web" alt=""/><div class="cta-card-label">Portfolio</div><h3>See my work</h3><p>Six projects spanning mobile apps, AI platforms, and healthcare frontends.</p></div>
+      <span class="arrow">→</span>
+    </a>
+    <a href="experience.html" class="cta-card reveal-scale" style="transition-delay:.1s">
+      <div><img class="cta-card-icon" id="cta-rocket" alt=""/><div class="cta-card-label">Background</div><h3>My experience</h3><p>Intern, hackathon team leader, published researcher — all while in final year.</p></div>
+      <span class="arrow">→</span>
+    </a>
+    <a href="contact.html" class="cta-card reveal-scale" style="transition-delay:.15s">
+      <div><img class="cta-card-icon" id="cta-mail" alt=""/><div class="cta-card-label">Work together</div><h3>Get in touch</h3><p>Available for freelance and full-time. Let's talk about what you're building.</p></div>
+      <span class="arrow">→</span>
+    </a>
+    <a href="https://github.com/Harsh100101" target="_blank" class="cta-card reveal-scale" style="transition-delay:.2s">
+      <div><img class="cta-card-icon" id="cta-gh" alt=""/><div class="cta-card-label">Open source</div><h3>GitHub profile</h3><p>22+ repos, consistent commits, and real project READMEs with screenshots.</p></div>
+      <span class="arrow">↗</span>
+    </a>
+  </div>
+</div>
+<footer>
+  <p>© 2026 Harsh Sorathiya</p>
+  <a href="#" class="footer-back">↑ Top</a>
+  <p><a href="contact.html" style="color:var(--accent);text-decoration:none">Hire me →</a></p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="imgs.js"></script>
+<script src="shape.js"></script>
+<script src="main.js"></script>
+<script>
+document.getElementById('sb-react').src = IMGS.react;
+document.getElementById('sb-web').src   = IMGS.react;
+document.getElementById('sb-redux').src = IMGS.redux;
+document.getElementById('sb-ai').src    = IMGS.ai;
+document.getElementById('sb-gh').src    = IMGS.github;
+document.getElementById('cta-web').src    = IMGS.web;
+document.getElementById('cta-rocket').src = IMGS.rocket;
+document.getElementById('cta-mail').src   = IMGS.mail;
+document.getElementById('cta-gh').src     = IMGS.github;
+
+const barObs=new IntersectionObserver(entries=>{
+  if(entries[0].isIntersecting){
+    document.querySelectorAll('.bar-fill').forEach((el,i)=>{
+      setTimeout(()=>{el.style.transitionDelay=i*0.1+'s';el.classList.add('animate');},i*80);
+    });
+    barObs.disconnect();
+  }
+},{threshold:.3});
+barObs.observe(document.getElementById('skill-bars'));
+</script>
+</body>
+</html>

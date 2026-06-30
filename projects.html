@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Projects — Harsh Sorathiya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+<style>
+.page-content{padding:4rem clamp(1.5rem,8vw,10rem);position:relative;z-index:2}
+.filter-bar{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:2.5rem}
+.filter-btn{background:rgba(255,255,255,.05);backdrop-filter:blur(10px);border:1px solid var(--glass-border);border-radius:10px;padding:.45rem 1.1rem;font-size:.8125rem;font-weight:500;color:var(--muted);cursor:pointer;transition:all .2s;font-family:var(--fb)}
+.filter-btn:hover{background:rgba(255,255,255,.09);border-color:var(--glass-border-hover);color:var(--text)}
+.filter-btn.active{background:rgba(91,127,255,.18);border-color:rgba(91,127,255,.4);color:var(--accent);box-shadow:0 2px 12px rgba(91,127,255,.2)}
+.projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem}
+.projects-grid .card.wide{grid-column:span 2}
+.card-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;backdrop-filter:blur(8px);border:1px solid var(--glass-border)}
+.card-icon img{width:28px;height:28px;object-fit:contain}
+.card-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.25rem}
+.card-links{display:flex;gap:.5rem}
+.card-link{color:var(--muted);text-decoration:none;font-size:.78rem;font-weight:500;display:flex;align-items:center;gap:.3rem;transition:color .2s,border-color .2s,background .2s;padding:.3rem .75rem;border:1px solid var(--glass-border);border-radius:8px;background:rgba(255,255,255,.04);backdrop-filter:blur(6px)}
+.card-link:hover{color:var(--text);border-color:var(--glass-border-hover);background:rgba(255,255,255,.08)}
+.card-title{font-family:var(--fd);font-size:1.05rem;font-weight:700;margin-bottom:.5rem;color:var(--text);letter-spacing:-.025em;margin-top:.6rem}
+.card-desc{color:var(--muted);font-size:.875rem;line-height:1.7;flex:1;margin-bottom:1.25rem}
+.card-stack{display:flex;flex-wrap:wrap;gap:.4rem}
+.card[data-cat].hidden{display:none !important}
+@media(max-width:768px){.projects-grid{grid-template-columns:1fr}.projects-grid .card.wide{grid-column:span 1}}
+</style>
+</head>
+<body>
+<div id="cursor"></div><div id="cursor-ring"></div>
+<div class="scroll-progress" id="scroll-progress"></div>
+<canvas id="bg-canvas"></canvas>
+<canvas id="shape-canvas" data-start-index="1"></canvas>
+<nav id="navbar" class="solid">
+  <a href="index.html" class="nav-logo">HS<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="experience.html">Experience</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="nav-cta">Hire me</a></li>
+  </ul>
+  <button class="nav-mobile-btn" id="mobile-btn">☰</button>
+</nav>
+<div class="nav-mobile-menu" id="mobile-menu">
+  <a href="index.html">Home</a><a href="projects.html">Projects</a>
+  <a href="experience.html">Experience</a><a href="about.html">About</a>
+  <a href="contact.html">Hire me →</a>
+</div>
+<div class="page">
+  <div class="page-hero">
+    <p class="page-hero-label reveal">Selected work</p>
+    <h1 class="reveal">Projects</h1>
+    <p class="reveal">Real products built with real technology — from AI recommendation engines to healthcare portals to mobile marketplaces.</p>
+  </div>
+  <div class="page-content">
+    <div class="filter-bar reveal">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="mobile">Mobile</button>
+      <button class="filter-btn" data-filter="web">Web</button>
+      <button class="filter-btn" data-filter="ai">AI / ML</button>
+    </div>
+    <div class="projects-grid">
+
+      <div class="card wide reveal" data-cat="ai web" style="transition-delay:.05s">
+        <div class="card-head">
+          <div class="card-icon" style="background:rgba(167,139,250,.12)"><img id="p-ai" alt="AI"/></div>
+          <div class="card-links"><a href="https://github.com/Harsh100101/Next-Read" target="_blank" class="card-link">GitHub ↗</a></div>
+        </div>
+        <span class="badge badge-ai">AI · Full-stack</span>
+        <div class="card-title">The Next Read — AI Book Recommendation Platform</div>
+        <p class="card-desc">Full-stack AI-powered platform with a hybrid recommendation engine (collaborative filtering + content-based). JWT auth, OTP email verification, user ratings, admin dashboard, Supabase cloud storage. Load-tested with JMeter at 200 concurrent users. The platform also formed the basis of a published IJSET research paper (October 2025).</p>
+        <div class="card-stack"><span class="stack-tag">React.js</span><span class="stack-tag">Flask</span><span class="stack-tag">PostgreSQL</span><span class="stack-tag">Supabase</span><span class="stack-tag">JWT</span><span class="stack-tag">Pandas</span><span class="stack-tag">NumPy</span><span class="stack-tag">JMeter</span></div>
+      </div>
+
+      <div class="card reveal" data-cat="web" style="transition-delay:.1s">
+        <div class="card-head">
+          <div class="card-icon" style="background:rgba(97,218,251,.1)"><img id="p-react" alt="React"/></div>
+          <div class="card-links">
+            <a href="https://harsh100101.github.io/amrutam-doc-portal/" target="_blank" class="card-link">Live ↗</a>
+            <a href="https://github.com/Harsh100101/amrutam-doc-portal" target="_blank" class="card-link">GitHub ↗</a>
+          </div>
+        </div>
+        <span class="badge badge-react">React · Healthcare</span>
+        <div class="card-title">Amrutam Doctor Portal</div>
+        <p class="card-desc">Doctor onboarding and practice management frontend for an Ayurvedic health platform. Global login/register modals, scroll-based active navigation, responsive public-to-dashboard layout system. Live on GitHub Pages.</p>
+        <div class="card-stack"><span class="stack-tag">React.js</span><span class="stack-tag">Vite</span><span class="stack-tag">CSS3</span><span class="stack-tag">React Hooks</span><span class="stack-tag">IntersectionObserver</span></div>
+      </div>
+
+      <div class="card reveal" data-cat="mobile" style="transition-delay:.15s">
+        <div class="card-head">
+          <div class="card-icon" style="background:rgba(167,139,250,.1)"><img id="p-redux" alt="Redux"/></div>
+          <div class="card-links"><a href="https://github.com/Harsh100101" target="_blank" class="card-link">GitHub ↗</a></div>
+        </div>
+        <span class="badge badge-rn">React Native</span>
+        <div class="card-title">Wellness Hub</div>
+        <p class="card-desc">Dual-sided marketplace app connecting wellness service providers and clients. Provider listings, booking flows, user profiles, and Redux-managed state across the entire app. Built with Expo for cross-platform deployment.</p>
+        <div class="card-stack"><span class="stack-tag">React Native</span><span class="stack-tag">Expo</span><span class="stack-tag">Redux Toolkit</span><span class="stack-tag">REST API</span><span class="stack-tag">Node.js</span></div>
+      </div>
+
+      <div class="card reveal" data-cat="ai" style="transition-delay:.2s">
+        <div class="card-head">
+          <div class="card-icon" style="background:rgba(251,146,60,.1)"><img id="p-ai2" alt="AI"/></div>
+          <div class="card-links"><a href="https://github.com/Harsh100101/Ai-Based-Automated-Resuming-Screening" target="_blank" class="card-link">GitHub ↗</a></div>
+        </div>
+        <span class="badge badge-ai">AI · Python</span>
+        <div class="card-title">AI-Based Resume Screening</div>
+        <p class="card-desc">Automated resume filtering using NLP to match candidates to job descriptions. Parses resumes, extracts skills and experience, and ranks applicants — reducing manual HR screening time.</p>
+        <div class="card-stack"><span class="stack-tag">Python</span><span class="stack-tag">NLP</span><span class="stack-tag">Machine Learning</span></div>
+      </div>
+
+      <div class="card reveal" data-cat="web" style="transition-delay:.25s">
+        <div class="card-head">
+          <div class="card-icon" style="background:rgba(91,127,255,.08)"><img id="p-react2" alt="React"/></div>
+          <div class="card-links"><a href="https://github.com/Harsh100101" target="_blank" class="card-link">GitHub ↗</a></div>
+        </div>
+        <span class="badge badge-react">React · Redux</span>
+        <div class="card-title">Product Manager App</div>
+        <p class="card-desc">Full CRUD React app. JWT authentication, protected routes, live product search, complete create/update/delete flows wired to DummyJSON API. Built in React 18 + Vite with Redux Toolkit for all global state.</p>
+        <div class="card-stack"><span class="stack-tag">React 18</span><span class="stack-tag">Redux Toolkit</span><span class="stack-tag">Vite</span><span class="stack-tag">REST API</span><span class="stack-tag">Protected Routes</span></div>
+      </div>
+
+      <div class="card reveal" data-cat="ai web" style="transition-delay:.3s">
+        <div class="card-head">
+          <div class="card-icon" style="background:rgba(167,139,250,.1)"><img id="p-web" alt="Web"/></div>
+          <div class="card-links"><a href="https://github.com/Harsh100101/social-media-analyzer" target="_blank" class="card-link">GitHub ↗</a></div>
+        </div>
+        <span class="badge badge-ai">AI · Web</span>
+        <div class="card-title">Social Media Analyzer</div>
+        <p class="card-desc">AI-driven content analysis tool tracking sentiment, engagement patterns, and content trends. Useful for brands monitoring their online presence and optimising content strategy.</p>
+        <div class="card-stack"><span class="stack-tag">JavaScript</span><span class="stack-tag">AI/NLP</span><span class="stack-tag">Data analysis</span></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<footer>
+  <p>© 2026 Harsh Sorathiya</p>
+  <a href="#" class="footer-back">↑ Top</a>
+  <p><a href="contact.html" style="color:var(--accent);text-decoration:none">Hire me →</a></p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="imgs.js"></script>
+<script src="shape.js"></script>
+<script src="main.js"></script>
+<script>
+document.getElementById('p-ai').src    = IMGS.ai;
+document.getElementById('p-ai2').src   = IMGS.ai;
+document.getElementById('p-react').src  = IMGS.react;
+document.getElementById('p-react2').src = IMGS.react;
+document.getElementById('p-redux').src  = IMGS.redux;
+document.getElementById('p-web').src    = IMGS.web;
+
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const f=btn.dataset.filter;
+    document.querySelectorAll('.projects-grid .card').forEach(card=>{
+      if(f==='all'||card.dataset.cat.includes(f))card.classList.remove('hidden');
+      else card.classList.add('hidden');
+    });
+  });
+});
+</script>
+</body>
+</html>

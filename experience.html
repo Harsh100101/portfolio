@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Experience — Harsh Sorathiya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+<style>
+.exp-layout{display:grid;grid-template-columns:1fr 360px;gap:3.5rem;padding:4rem clamp(1.5rem,8vw,10rem);position:relative;z-index:2;align-items:start}
+.ach-grid{display:flex;flex-direction:column;gap:1rem;position:sticky;top:90px}
+.ach-card{
+  background:linear-gradient(155deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  backdrop-filter:blur(var(--glass-blur)) saturate(140%);
+  -webkit-backdrop-filter:blur(var(--glass-blur)) saturate(140%);
+  border:1px solid var(--glass-border);border-radius:16px;padding:1.5rem;
+  transition:border-color .25s,transform .25s,background .25s;
+  position:relative;overflow:hidden;display:flex;gap:1rem;align-items:flex-start;
+  box-shadow:var(--glass-shadow);
+}
+.ach-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);opacity:.5}
+.ach-card:hover{border-color:var(--glass-border-hover);transform:translateY(-2px);background:linear-gradient(155deg, rgba(255,255,255,0.09), rgba(255,255,255,0.03))}
+.ach-img{width:38px;height:38px;object-fit:contain;flex-shrink:0;animation:float 3s ease-in-out infinite}
+.ach-card:nth-child(2) .ach-img{animation-delay:.6s}
+.ach-card:nth-child(3) .ach-img{animation-delay:1.2s}
+.ach-card:nth-child(4) .ach-img{animation-delay:1.8s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.ach-body{}
+.ach-title{font-family:var(--fd);font-size:.9375rem;font-weight:700;color:var(--text);margin-bottom:.35rem}
+.ach-desc{font-size:.8rem;color:var(--muted);line-height:1.6}
+.sidebar-label{font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:1.25rem;display:flex;align-items:center;gap:.5rem}
+.sidebar-label::before{content:'';width:20px;height:1px;background:var(--accent)}
+@media(max-width:1000px){.exp-layout{grid-template-columns:1fr}.ach-grid{position:static}}
+</style>
+</head>
+<body>
+<div id="cursor"></div><div id="cursor-ring"></div>
+<div class="scroll-progress" id="scroll-progress"></div>
+<canvas id="bg-canvas"></canvas>
+<canvas id="shape-canvas" data-start-index="2"></canvas>
+<nav id="navbar" class="solid">
+  <a href="index.html" class="nav-logo">HS<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="experience.html">Experience</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="nav-cta">Hire me</a></li>
+  </ul>
+  <button class="nav-mobile-btn" id="mobile-btn">☰</button>
+</nav>
+<div class="nav-mobile-menu" id="mobile-menu">
+  <a href="index.html">Home</a><a href="projects.html">Projects</a>
+  <a href="experience.html">Experience</a><a href="about.html">About</a>
+  <a href="contact.html">Hire me →</a>
+</div>
+<div class="page">
+  <div class="page-hero">
+    <p class="page-hero-label reveal">Background</p>
+    <h1 class="reveal">Experience</h1>
+    <p class="reveal">Building real products in production environments while still in my final year. Here's where I've been and what I've achieved along the way.</p>
+  </div>
+  <div class="exp-layout">
+    <!-- TIMELINE -->
+    <div>
+      <p class="section-label reveal-left">Work &amp; education</p>
+      <div class="timeline" style="margin-top:2rem">
+
+        <div class="tl-item reveal-left" style="transition-delay:.05s">
+          <div class="tl-date">Jan 2026<br/>– Apr 2026</div>
+          <div class="tl-line"></div><div class="tl-dot"></div>
+          <div class="tl-content">
+            <div class="tl-role">React Native Developer — Intern</div>
+            <div class="tl-company">Frontend Development · Vadodara, Gujarat</div>
+            <div class="tl-desc"><ul>
+              <li>Built and maintained React Native mobile app features for a live production product</li>
+              <li>Worked with REST APIs, Redux Toolkit state management, and component-based architecture</li>
+              <li>Collaborated with design and backend teams on weekly feature delivery</li>
+              <li>Reviewed PR feedback and iterated on UI components for production readiness</li>
+            </ul></div>
+          </div>
+        </div>
+
+        <div class="tl-item reveal-left" style="transition-delay:.15s">
+          <div class="tl-date">Oct 2025</div>
+          <div class="tl-line"></div><div class="tl-dot"></div>
+          <div class="tl-content">
+            <div class="tl-role">Research Author — Published</div>
+            <div class="tl-company">IJSET — International Journal of Science, Engineering &amp; Technology</div>
+            <div class="tl-desc">Published peer-reviewed research on personalised recommendation systems — covering collaborative filtering, content-based approaches, and hybrid ML pipelines. This work directly informed the AI engine built in The Next Read platform, which was load-tested at 200 concurrent users.</div>
+          </div>
+        </div>
+
+        <div class="tl-item reveal-left" style="transition-delay:.25s">
+          <div class="tl-date">2024</div>
+          <div class="tl-line"></div><div class="tl-dot"></div>
+          <div class="tl-content">
+            <div class="tl-role">Hackathon Team Leader — Healthcare AI</div>
+            <div class="tl-company">Participant · Parul University</div>
+            <div class="tl-desc">Led a team in a healthcare AI hackathon at Parul University. As team leader, designed the system architecture and coordinated frontend, backend, and ML work across team members — delivering a working AI health solution within the hackathon timeline.</div>
+          </div>
+        </div>
+
+        <div class="tl-item reveal-left" style="transition-delay:.35s">
+          <div class="tl-date">2022 – 2026</div>
+          <div class="tl-line"></div><div class="tl-dot"></div>
+          <div class="tl-content">
+            <div class="tl-role">B.Tech — Computer Science &amp; Engineering (AI)</div>
+            <div class="tl-company">Parul University, Vadodara, Gujarat</div>
+            <div class="tl-desc">Specialisation in Artificial Intelligence. Coursework covering machine learning, data structures, algorithms, computer networks, digital electronics, and full-stack development. Final year student graduating 2026.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- SIDEBAR -->
+    <div class="ach-grid">
+      <div class="sidebar-label reveal">Highlights</div>
+      <div class="ach-card reveal-scale" style="transition-delay:.05s">
+        <img class="ach-img" id="ach-trophy" alt="Hackathon"/>
+        <div class="ach-body">
+          <div class="ach-title">Healthcare AI Hackathon — Team Leader</div>
+          <div class="ach-desc">Led a team at Parul University's healthcare AI hackathon — handled full architecture and coordination.</div>
+        </div>
+      </div>
+      <div class="ach-card reveal-scale" style="transition-delay:.12s">
+        <img class="ach-img" id="ach-research" alt="Research"/>
+        <div class="ach-body">
+          <div class="ach-title">Published Research — IJSET (Oct 2025)</div>
+          <div class="ach-desc">Peer-reviewed paper on personalised recommendation systems with collaborative filtering pipelines.</div>
+        </div>
+      </div>
+      <div class="ach-card reveal-scale" style="transition-delay:.19s">
+        <img class="ach-img" id="ach-rocket" alt="Internship"/>
+        <div class="ach-body">
+          <div class="ach-title">Production Internship (Jan–Apr 2026)</div>
+          <div class="ach-desc">Wrote real React Native code for a live production app — not just tutorials or toy projects.</div>
+        </div>
+      </div>
+      <div class="ach-card reveal-scale" style="transition-delay:.26s">
+        <img class="ach-img" id="ach-perf" alt="Performance"/>
+        <div class="ach-body">
+          <div class="ach-title">Load-Tested at 200 Concurrent Users</div>
+          <div class="ach-desc">JMeter performance testing on The Next Read validated backend stability under production-level load.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer>
+  <p>© 2026 Harsh Sorathiya</p>
+  <a href="#" class="footer-back">↑ Top</a>
+  <p><a href="contact.html" style="color:var(--accent);text-decoration:none">Hire me →</a></p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="imgs.js"></script>
+<script src="shape.js"></script>
+<script src="main.js"></script>
+<script>
+document.getElementById('ach-trophy').src   = IMGS.trophy;
+document.getElementById('ach-research').src = IMGS.research;
+document.getElementById('ach-rocket').src   = IMGS.rocket;
+document.getElementById('ach-perf').src     = IMGS.performance;
+</script>
+</body>
+</html>

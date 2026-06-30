@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Harsh Sorathiya — React Native & Frontend Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+<style>
+#shape-canvas{position:fixed;top:0;right:0;width:50vw;height:100vh;z-index:1;pointer-events:none;opacity:.85}
+@media(max-width:900px){#shape-canvas{width:100vw;opacity:.3}}
+.scroll-progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--a2),var(--a4));z-index:300;width:0%;transition:width .1s linear;box-shadow:0 0 12px rgba(91,127,255,.6)}
+.hero-section{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:5rem clamp(1.5rem,8vw,10rem) 3rem;position:relative;z-index:2}
+.hero-glow{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(91,127,255,.1) 0%,transparent 70%);top:-120px;right:-150px;pointer-events:none}
+.hero-glow2{position:absolute;width:450px;height:450px;border-radius:50%;background:radial-gradient(circle,rgba(167,139,250,.07) 0%,transparent 70%);bottom:80px;left:-100px;pointer-events:none}
+.eyebrow{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.06);backdrop-filter:blur(10px);border:1px solid var(--glass-border);border-radius:100px;padding:.4rem 1.1rem;font-size:.8rem;font-weight:500;color:var(--accent);margin-bottom:2rem;width:fit-content;animation:ey-in .8s cubic-bezier(.16,1,.3,1) both;box-shadow:inset 0 1px 0 rgba(255,255,255,0.1)}
+@keyframes ey-in{from{opacity:0;transform:translateY(12px) scale(.95)}to{opacity:1;transform:none}}
+.pulse-dot{width:7px;height:7px;border-radius:50%;background:var(--a3);animation:pd 2.2s ease-in-out infinite;flex-shrink:0}
+@keyframes pd{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+h1.hero-h1{font-family:var(--fd);font-size:clamp(3rem,7.5vw,5.5rem);font-weight:700;letter-spacing:-.05em;line-height:1.04;margin-bottom:1.5rem;animation:hi 1s cubic-bezier(.16,1,.3,1) .1s both;max-width:14ch}
+@keyframes hi{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.gradient-word{background:linear-gradient(135deg,var(--accent) 0%,var(--a2) 50%,var(--a4) 100%);background-size:200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gs 4s ease infinite}
+@keyframes gs{0%,100%{background-position:0%}50%{background-position:100%}}
+.hero-desc{color:var(--muted);font-size:clamp(.9375rem,1.5vw,1.0625rem);max-width:500px;margin-bottom:2.5rem;line-height:1.8;animation:hi 1s cubic-bezier(.16,1,.3,1) .25s both}
+.tw-wrap{color:var(--accent);font-weight:500}
+.tw-cur{display:inline-block;width:2px;height:.9em;background:var(--accent);margin-left:2px;vertical-align:middle;animation:blink .75s step-end infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;animation:hi 1s cubic-bezier(.16,1,.3,1) .4s both}
+.hero-stats{display:flex;gap:0;margin-top:4.5rem;padding-top:2rem;border-top:1px solid var(--border);flex-wrap:wrap;animation:hi 1s cubic-bezier(.16,1,.3,1) .55s both}
+.stat{padding:0 2.5rem 0 0}
+.stat+.stat{padding-left:2.5rem;border-left:1px solid var(--border)}
+.stat-num{font-family:var(--fd);font-size:2rem;font-weight:700;line-height:1;margin-bottom:.25rem;background:linear-gradient(135deg,var(--text),var(--muted));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-label{font-size:.77rem;color:var(--muted);font-weight:500}
+.home-projects{padding:5rem clamp(1.5rem,8vw,10rem);position:relative;z-index:2}
+.proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;margin-bottom:2rem}
+.proj-grid .card.wide{grid-column:span 2}
+.card-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;backdrop-filter:blur(8px);border:1px solid var(--glass-border)}
+.card-icon img{width:28px;height:28px;object-fit:contain}
+.card-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.25rem}
+.card-links{display:flex;gap:.5rem}
+.card-link{color:var(--muted);text-decoration:none;font-size:.78rem;font-weight:500;display:flex;align-items:center;gap:.3rem;transition:color .2s,border-color .2s,background .2s;padding:.3rem .75rem;border:1px solid var(--glass-border);border-radius:8px;background:rgba(255,255,255,.04);backdrop-filter:blur(6px)}
+.card-link:hover{color:var(--text);border-color:var(--glass-border-hover);background:rgba(255,255,255,.08)}
+.card-title{font-family:var(--fd);font-size:1.05rem;font-weight:700;margin-bottom:.5rem;color:var(--text);letter-spacing:-.025em;margin-top:.6rem}
+.card-desc{color:var(--muted);font-size:.875rem;line-height:1.7;flex:1;margin-bottom:1.25rem}
+.card-stack{display:flex;flex-wrap:wrap;gap:.4rem}
+.more-btn-wrap{text-align:center;margin-top:1.5rem}
+.skills-strip{padding:4rem clamp(1.5rem,8vw,10rem);position:relative;z-index:2}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1px;background:var(--glass-border);border:1px solid var(--glass-border);border-radius:18px;overflow:hidden;backdrop-filter:blur(var(--glass-blur)) saturate(140%);box-shadow:var(--glass-shadow)}
+.skill-cell{background:rgba(255,255,255,0.025);padding:1.4rem;transition:background .25s;position:relative;overflow:hidden}
+.skill-cell::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--accent),var(--a2));opacity:0;transition:opacity .3s}
+.skill-cell:hover::before{opacity:.08}
+.skill-cell:hover{background:rgba(255,255,255,0.06)}
+.skill-cat{font-size:.67rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--a2);margin-bottom:.7rem;display:flex;align-items:center;gap:.5rem;position:relative}
+.skill-cat img{width:18px;height:18px;object-fit:contain;flex-shrink:0}
+.skill-tags{display:flex;flex-wrap:wrap;gap:.4rem;position:relative}
+.cta-strip{padding:5rem clamp(1.5rem,8vw,10rem);position:relative;z-index:2;text-align:center;border-top:1px solid var(--glass-border);background:rgba(255,255,255,0.02);backdrop-filter:blur(16px)}
+.cta-strip h2{margin-bottom:.75rem}
+.cta-strip p.cta-sub{color:var(--muted);max-width:480px;margin:0 auto 2rem}
+.cta-strip .btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.cta-glow{position:absolute;width:500px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(91,127,255,.1) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+@media(max-width:768px){.proj-grid{grid-template-columns:1fr}.proj-grid .card.wide{grid-column:span 1}.stat+.stat{padding-left:1.5rem}.stat{padding-right:1.5rem}}
+</style>
+</head>
+<body>
+<div id="cursor"></div><div id="cursor-ring"></div>
+<div class="scroll-progress" id="scroll-progress"></div>
+<canvas id="bg-canvas"></canvas>
+<canvas id="shape-canvas" data-sections="4"></canvas>
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">HS<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="experience.html">Experience</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="nav-cta">Hire me</a></li>
+  </ul>
+  <button class="nav-mobile-btn" id="mobile-btn">☰</button>
+</nav>
+<div class="nav-mobile-menu" id="mobile-menu">
+  <a href="index.html">Home</a><a href="projects.html">Projects</a>
+  <a href="experience.html">Experience</a><a href="about.html">About</a>
+  <a href="contact.html">Hire me →</a>
+</div>
+
+<div class="hero-section" data-shape-section="0">
+  <div class="hero-glow"></div><div class="hero-glow2"></div>
+  <div class="eyebrow"><span class="pulse-dot"></span> Available for freelance &amp; full-time roles</div>
+  <h1 class="hero-h1">Building apps<br/>people <span class="gradient-word">love</span><br/>to use.</h1>
+  <p class="hero-desc"><span class="tw-wrap" id="tw"></span><span class="tw-cur"></span><br/>React Native &amp; React.js developer from Gujarat, India — building fast, clean mobile and web products with a focus on health-tech.</p>
+  <div class="hero-actions">
+    <a href="projects.html" class="btn btn-primary"><span>View my work</span><span>→</span></a>
+    <a href="contact.html" class="btn btn-secondary">Get in touch</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num" id="s1">0</div><div class="stat-label">GitHub repos</div></div>
+    <div class="stat"><div class="stat-num" id="s2">0</div><div class="stat-label">Projects shipped</div></div>
+    <div class="stat"><div class="stat-num">1</div><div class="stat-label">Research paper (IJSET)</div></div>
+    <div class="stat"><div class="stat-num">Team</div><div class="stat-label">Hackathon leader</div></div>
+  </div>
+</div>
+
+<div class="marquee-wrap"><div class="marquee-track" id="marquee"></div></div>
+
+<div class="home-projects" data-shape-section="1">
+  <p class="section-label reveal">Featured work</p>
+  <h2 class="reveal">Selected projects</h2>
+  <p class="section-sub reveal">A few highlights — <a href="projects.html" style="color:var(--accent);text-decoration:none">see all projects →</a></p>
+  <div class="proj-grid">
+    <div class="card wide reveal" style="transition-delay:.05s">
+      <div class="card-head">
+        <div class="card-icon" style="background:rgba(167,139,250,.12)"><img id="icon-ai-1" alt="AI"/></div>
+        <div class="card-links"><a href="https://github.com/Harsh100101/Next-Read" target="_blank" class="card-link">GitHub ↗</a></div>
+      </div>
+      <span class="badge badge-ai">AI · Full-stack</span>
+      <div class="card-title">The Next Read — AI Book Recommendation Platform</div>
+      <p class="card-desc">Full-stack AI platform with hybrid recommendation engine. JWT auth, OTP verification, admin dashboard, Supabase storage, load-tested at 200 concurrent users with JMeter.</p>
+      <div class="card-stack"><span class="stack-tag">React.js</span><span class="stack-tag">Flask</span><span class="stack-tag">PostgreSQL</span><span class="stack-tag">Supabase</span><span class="stack-tag">Pandas</span><span class="stack-tag">JMeter</span></div>
+    </div>
+    <div class="card reveal" style="transition-delay:.1s">
+      <div class="card-head">
+        <div class="card-icon" style="background:rgba(97,218,251,.1)"><img id="icon-react-1" alt="React"/></div>
+        <div class="card-links">
+          <a href="https://harsh100101.github.io/amrutam-doc-portal/" target="_blank" class="card-link">Live ↗</a>
+          <a href="https://github.com/Harsh100101/amrutam-doc-portal" target="_blank" class="card-link">GitHub ↗</a>
+        </div>
+      </div>
+      <span class="badge badge-react">React · Healthcare</span>
+      <div class="card-title">Amrutam Doctor Portal</div>
+      <p class="card-desc">Doctor onboarding frontend for an Ayurvedic health platform. Live on GitHub Pages.</p>
+      <div class="card-stack"><span class="stack-tag">React.js</span><span class="stack-tag">Vite</span><span class="stack-tag">CSS3</span></div>
+    </div>
+    <div class="card reveal" style="transition-delay:.15s">
+      <div class="card-head">
+        <div class="card-icon" style="background:rgba(167,139,250,.1)"><img id="icon-redux-1" alt="Redux"/></div>
+        <div class="card-links"><a href="https://github.com/Harsh100101" target="_blank" class="card-link">GitHub ↗</a></div>
+      </div>
+      <span class="badge badge-rn">React Native</span>
+      <div class="card-title">Wellness Hub</div>
+      <p class="card-desc">Dual-sided marketplace app connecting wellness providers and clients. Built with Expo and Redux Toolkit.</p>
+      <div class="card-stack"><span class="stack-tag">React Native</span><span class="stack-tag">Expo</span><span class="stack-tag">Redux Toolkit</span></div>
+    </div>
+  </div>
+  <div class="more-btn-wrap reveal"><a href="projects.html" class="btn btn-secondary">View all 6 projects →</a></div>
+</div>
+
+<div class="skills-strip" data-shape-section="2">
+  <p class="section-label reveal">What I build with</p>
+  <h2 class="reveal" style="margin-bottom:2rem">Tech stack</h2>
+  <div class="skills-grid">
+    <div class="skill-cell reveal-scale" style="transition-delay:.05s">
+      <div class="skill-cat"><img id="icon-react-sk" alt=""/>Mobile / React Native</div>
+      <div class="skill-tags"><span class="tag">React Native</span><span class="tag">Expo</span><span class="tag">Android</span></div>
+    </div>
+    <div class="skill-cell reveal-scale" style="transition-delay:.1s">
+      <div class="skill-cat"><img id="icon-web-sk" alt=""/>Frontend</div>
+      <div class="skill-tags"><span class="tag">React.js</span><span class="tag">Vite</span><span class="tag">TypeScript</span><span class="tag">HTML/CSS</span></div>
+    </div>
+    <div class="skill-cell reveal-scale" style="transition-delay:.15s">
+      <div class="skill-cat"><img id="icon-redux-sk" alt=""/>State &amp; Data</div>
+      <div class="skill-tags"><span class="tag">Redux Toolkit</span><span class="tag">REST APIs</span><span class="tag">React Query</span></div>
+    </div>
+    <div class="skill-cell reveal-scale" style="transition-delay:.2s">
+      <div class="skill-cat"><img id="icon-perf-sk" alt=""/>Performance</div>
+      <div class="skill-tags"><span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">Flask</span><span class="tag">MongoDB</span></div>
+    </div>
+    <div class="skill-cell reveal-scale" style="transition-delay:.25s">
+      <div class="skill-cat"><img id="icon-ai-sk" alt=""/>AI &amp; ML</div>
+      <div class="skill-tags"><span class="tag">Python</span><span class="tag">Collab Filtering</span><span class="tag">NLP</span></div>
+    </div>
+    <div class="skill-cell reveal-scale" style="transition-delay:.3s">
+      <div class="skill-cat"><img id="icon-gh-sk" alt=""/>Tools</div>
+      <div class="skill-tags"><span class="tag">Git</span><span class="tag">Postman</span><span class="tag">JMeter</span><span class="tag">Supabase</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="cta-strip" data-shape-section="3">
+  <div class="cta-glow"></div>
+  <p class="section-label reveal" style="justify-content:center">Ready to work</p>
+  <h2 class="reveal">Let's build something great.</h2>
+  <p class="cta-sub reveal">Open to freelance projects, full-time roles, and interesting conversations.</p>
+  <div class="btns reveal">
+    <a href="contact.html" class="btn btn-primary"><span>Start a conversation</span><span>→</span></a>
+    <a href="experience.html" class="btn btn-secondary">My experience</a>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Harsh Sorathiya</p>
+  <a href="#" class="footer-back">↑ Top</a>
+  <p>React Native & Frontend Developer · Gujarat</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="imgs.js"></script>
+<script src="shape.js"></script>
+<script src="main.js"></script>
+<script>
+// Inject images
+document.getElementById('icon-ai-1').src   = IMGS.ai;
+document.getElementById('icon-react-1').src = IMGS.react;
+document.getElementById('icon-redux-1').src = IMGS.redux;
+document.getElementById('icon-react-sk').src = IMGS.react;
+document.getElementById('icon-web-sk').src   = IMGS.web;
+document.getElementById('icon-redux-sk').src  = IMGS.redux;
+document.getElementById('icon-perf-sk').src  = IMGS.performance;
+document.getElementById('icon-ai-sk').src    = IMGS.ai;
+document.getElementById('icon-gh-sk').src    = IMGS.github;
+
+// Typewriter
+const phrases=['React Native Developer','React.js Developer','Frontend Engineer','Mobile App Builder'];
+let pi=0,ci=0,del=false;
+const tw=document.getElementById('tw');
+function type(){const p=phrases[pi];if(!del){tw.textContent=p.slice(0,++ci);if(ci===p.length){del=true;setTimeout(type,1800);return}}else{tw.textContent=p.slice(0,--ci);if(ci===0){del=false;pi=(pi+1)%phrases.length;setTimeout(type,400);return}}setTimeout(type,del?55:80);}
+setTimeout(type,900);
+
+// Counters
+const obs=new IntersectionObserver(e=>{if(e[0].isIntersecting){animCounter(document.getElementById('s1'),22,'+');animCounter(document.getElementById('s2'),5,'+');obs.disconnect();}},{threshold:.3});
+obs.observe(document.querySelector('.hero-stats'));
+</script>
+</body>
+</html>
